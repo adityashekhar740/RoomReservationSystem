@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Modal from '../components/Modal';
 import { useSelector } from 'react-redux';
@@ -19,8 +19,14 @@ function Home() {
         amenities:[],
         roomId:'',
         userId:'',
+        price:0,
         
     })
+    useEffect(()=>{
+        if(currentUser){
+            setformData({...formData,userId: currentUser._id});
+        }
+    },[])
     const handleChange=(e)=>{
         const {id,value} = e.target;
         setformData({
@@ -58,24 +64,24 @@ const handleSubmit=async(e)=>{
                     <div className='bg-[#ece9e9] py-4 px-2 flex flex-wrap gap-9 justify-center  w-[96%] mx-auto rounded-sm ' >
                         <div className='flex flex-col text-sm' >
                             <label htmlFor="name">Your Name</label>
-                            <input onChange={(e)=>{handleChange(e)}} className='py-[9px] px-2 w-[270px] border-[1px] border-solid border-gray-400  ' placeholder='Enter your name' type="text" name="" id="name" />
+                            <input required onChange={(e)=>{handleChange(e)}} className='py-[9px] px-2 w-[270px] border-[1px] border-solid border-gray-400  ' placeholder='Enter your name' type="text" name="" id="name" />
 
                         </div>
                         <div className=' flex flex-col' >
                             <label className='text-sm' htmlFor="checkIn">Check In</label>
-                            <input onChange={(e)=>{handleChange(e)}} className='py-[6px] px-2 max-w-[220px] border-[1px] border-solid border-gray-400 '  type="date" name="checkIn" id="checkIn" />
+                            <input required onChange={(e)=>{handleChange(e)}} className='py-[6px] px-2 max-w-[220px] border-[1px] border-solid border-gray-400 '  type="date" name="checkIn" id="checkIn" />
                         </div>
                         <div className=' flex flex-col' >
                             <label className='text-sm' htmlFor="checkOut">Check Out</label>
-                            <input onChange={(e)=>{handleChange(e)}} className='py-[6px] px-2 max-w-[220px] border-[1px] border-solid border-gray-400 '  type="date" name="date" id="checkOut" />
+                            <input required onChange={(e)=>{handleChange(e)}} className='py-[6px] px-2 max-w-[220px] border-[1px] border-solid border-gray-400 '  type="date" name="date" id="checkOut" />
                         </div>
                         <div className=' flex flex-col' >
                             <label className='text-sm' htmlFor="guests">Total Guests</label>
-                            <input onChange={(e)=>{handleChange(e)}} className='py-[6px] px-2 max-w-[160px] border-[1px] border-solid border-gray-400 '  type="number" name="guests" id="guests" />
+                            <input required onChange={(e)=>{handleChange(e)}} className='py-[6px] px-2 max-w-[160px] border-[1px] border-solid border-gray-400 '  type="number" name="guests" id="guests" />
                         </div>
                         <div className=' flex flex-col' >
                             <label className='text-sm' htmlFor="roomType">Room Preference</label>
-                            <select onChange={(e)=>{handleChange(e)}} className='py-[6px] px-2 max-w-[160px] border-[1px] border-solid border-gray-400 ' name="" id="roomType">
+                            <select required onChange={(e)=>{handleChange(e)}} className='py-[6px] px-2 max-w-[160px] border-[1px] border-solid border-gray-400 ' name="" id="roomType">
                                 <option value="select">select</option>
                                 <option value="queen">Queen</option>
                                 <option value="sweet">Sweet</option>
@@ -86,6 +92,10 @@ const handleSubmit=async(e)=>{
                         <div className=' flex flex-col' >
                             <button className='bg-[#d11242]  text-white px-10 rounded-sm py-4   ' >CHECK AVAILABILITY</button>
                         </div>
+
+
+
+                        
                     </div>
                 </form>
             </div>

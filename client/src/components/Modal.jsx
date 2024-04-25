@@ -18,26 +18,33 @@ function Modal({ setmodalOpen, Rooms,handleChange ,setformData,formData}) {
 
         }
     }
+
+    useEffect(()=>{
+      setformData({...formData,price:Rooms.price});
+    },[])
+
+    
     const handleFormSubmit=async(e)=>{
       e.preventDefault();
       if(currentUser===null){
         navigate('/signin');
       }
-      setformData({...formData,amenities:amenTemp});
-      setformData({...formData,userId:currentUser._id})
+      await setformData({...formData,amenities:[...amenTemp]});
       try{
         const res=await axios.post(`/api/reservations/booking/${currentUser._id}`,formData);
         alert('✅ Room Booked Wait for confirmation');
-        window.location.reload();
+        console.log(res.data);
+        navigate('/bookings');
       }
       catch(e){
-  alert('UNABLE TO TAKE BOOKING');        
+        console.log(e);
+  // alert('UNABLE TO TAKE BOOKING');        
       }
     }
 
   return (
     <>
-      <form className=" overflow-auto px-4 modal h-[60%] w-[70%] left-[15%] top-[20%] absolute md:top-[10%]  md:left-[25%] md:w-[50%]  md:h-[80%]  bg-white z-[10] rounded-sm ">
+      <form onSubmit={(e)=>{handleFormSubmit(e)}} className=" overflow-auto px-4 modal h-[60%] w-[70%] left-[15%] top-[20%] absolute md:top-[10%]  md:left-[25%] md:w-[50%]  md:h-[80%]  bg-white z-[10] rounded-sm ">
         <div className="flex justify-end text-[34px] px-3 ">
           <span
             onClick={() => {
@@ -67,26 +74,26 @@ function Modal({ setmodalOpen, Rooms,handleChange ,setformData,formData}) {
             <div className="flex gap-4 justify-around " >
                 <div className="flex flex-col gap-2 w-[40%] " >
                 <label htmlFor="phone">Phone no.</label>
-                <input onChange={(e)=>{handleChange(e)}} className=" py-2 px-2 border-b-[0.5px] border-solid border-[#d11242]  " type="number" name="" id="phone" />
+                <input required onChange={(e)=>{handleChange(e)}} className=" py-2 px-2 border-b-[0.5px] border-solid border-[#d11242]  " type="number" name="" id="phone" />
             </div>
             <div className="flex flex-col gap-2 w-[40%] " >
                 <label htmlFor="email">Email</label>
-                <input onChange={(e)=>{handleChange(e)}} className=" py-2 px-2 border-b-[0.5px] border-solid border-[#d11242]"  type="email" name="" id="email" />
+                <input required onChange={(e)=>{handleChange(e)}} className=" py-2 px-2 border-b-[0.5px] border-solid border-[#d11242]"  type="email" name="" id="email" />
             </div>
             </div>
             <div className="flex gap-4 justify-around " >
                 <div className="flex flex-col gap-2 w-[40%] " >
                     <label htmlFor="address">Address</label>
-                <textarea onChange={(e)=>{handleChange(e)}} className="py-2 px-2 border-b-[0.5px] border-solid border-[#d11242]" name="" id="address" cols="30" rows="2"></textarea>
+                <textarea required onChange={(e)=>{handleChange(e)}} className="py-2 px-2 border-b-[0.5px] border-solid border-[#d11242]" name="" id="address" cols="30" rows="2"></textarea>
                 </div>
                 <div className="flex flex-col gap-2 w-[40%] " >
                     <label htmlFor="message">Any Message</label>
-                <textarea onChange={(e)=>{handleChange(e)}} className="py-2 px-2 border-b-[0.5px] border-solid border-[#d11242]" name="" id="message" cols="30" rows="2"></textarea>
+                <textarea required onChange={(e)=>{handleChange(e)}} className="py-2 px-2 border-b-[0.5px] border-solid border-[#d11242]" name="" id="message" cols="30" rows="2"></textarea>
                 </div>
             </div>
         <div className="mt-4 flex justify-between px-5 " >
             <h1 className="text-2xl  " >Rs.<span className="text-[#d11242] font-semibold " >{Rooms.price}/-</span></h1>
-            <button onClick={(e)=>{handleFormSubmit(e)}} className="bg-[#d11242] py-2 px-4 text-white rounded-sm " >Book & Pay Later</button>
+            <button  className="bg-[#d11242] py-2 px-4 text-white rounded-sm " >Book & Pay Later</button>
         </div>
             </div>
         </div>
