@@ -20,7 +20,7 @@ user can see the booking analytics with the extra add on of update booking ,
    for Eviromental variables : make .env file in root directory
    include :
    1. MONGO : "mongodb+srv://shekharaditya740:gEueLe3kVyjLYM86@cluster.b7jfy6l.mongodb.net/?retryWrites=true&w=majority"
-   2. SECRET_KEY : "SECRET_KEY="secret is 2121"
+   2. JWT_SECRET : "secret is 2121"
 
 
 Live Link (hosted on Render ) : https://roomreservationsystem.onrender.com/
