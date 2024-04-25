@@ -15,7 +15,7 @@ user can see the booking analytics with the extra add on of update booking ,
 
 3. Setup :
 
-   for Backend : npm i (in root directory )
+   for Backend : npm i (in root directory ) \n
    for frontend : cd client  ->  npm i (in client )
    for Eviromental variables : make .env file in root directory
    include :
