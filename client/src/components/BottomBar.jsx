@@ -24,6 +24,7 @@ function BottomBar() {
           currentUser!==null?<Link onClick={(e)=>{handleLogout(e)}} >Logout</Link>:<Link>Login</Link>
         }
         <div className='' >Terms & conditions</div>
+        {/* <h1>sfsg</h1> */}
     </div>
   )
 }
