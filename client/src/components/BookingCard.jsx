@@ -18,7 +18,8 @@ function BookingCard({data}) {
         }
         catch(e){
             console.log(e);
-            alert(e.data.message);
+        alert(e.response.data);
+            
         }
     }
   

@@ -37,8 +37,7 @@ function Modal({ setmodalOpen, Rooms,handleChange ,setformData,formData}) {
         navigate('/bookings');
       }
       catch(e){
-        console.log(e);
-  // alert('UNABLE TO TAKE BOOKING');        
+        alert(e.response.data);
       }
     }
 
