@@ -6,7 +6,7 @@ const CheckAvail = async (req, res) => {
     let result = await Rooms.findOne({
       type: roomType,
     });
-    if (result.userRef.length > 3) {
+    if (result.userRef.length > 1) {
       return res.status(500).json(`Currently ${roomType}  is fully booked`);
     } else {
       res.status(200).json(result);
@@ -50,6 +50,16 @@ const Booking = async (req, res) => {
     userId,
     price,
   });
+  if(reservation){
+    const room=await Rooms.findByIdAndUpdate(roomId,
+    {
+      $push:{
+        userRef:userId
+      },
+    },
+    {new:true}
+    );
+  }
   res.status(200).json(reservation);
   }
   catch(e){

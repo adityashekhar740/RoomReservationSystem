@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Home from './pages/Home';
-import Test from './pages/Test';
 import BottomBar from './components/BottomBar';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';

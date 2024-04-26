@@ -1,31 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 function Signup() {
   const [formData, setFormData] = useState({});
 
-  const {loading,error}=useSelector((state)=>state.user);
-  const Navigate=useNavigate();
+  const { loading, error } = useSelector((state) => state.user);
+  const Navigate = useNavigate();
   const handlechange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-  console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/auth/signup", formData);   
-      Navigate('/signin');
-    } catch (error) {
-   
-    }
-    
+      const res = await axios.post("/api/auth/signup", formData);
+      Navigate("/signin");
+    } catch (error) {}
   };
   return (
     <div className="p-3 max-w-lg mx-auto  mt-[100px] ">
       <h1 className="font-semibold my-7 text-3xl text-center ">Sign Up</h1>
-       <div>
-        {error?<p className="text-red-500 text-lg text-center " >{error}</p>:null}
+      <div>
+        {error ? (
+          <p className="text-red-500 text-lg text-center ">{error}</p>
+        ) : null}
       </div>
       <form className="flex flex-col gap-4" action="">
         <input
@@ -57,7 +55,7 @@ function Signup() {
           disabled={loading}
           className="bg-slate-700 disabled:opacity-80 text-white p-3 rounded-lg uppercase hover:opacity-95 "
         >
-          {loading?'loading...':'sign in'}
+          {loading ? "loading..." : "sign in"}
         </button>
       </form>
       <div className="flex gap-2 mt-4 ">
@@ -66,7 +64,6 @@ function Signup() {
           Sign Up
         </Link>
       </div>
-     
     </div>
   );
 }

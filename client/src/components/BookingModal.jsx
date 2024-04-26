@@ -18,8 +18,7 @@ function BookingModal({ data, setopenModal }) {
       setamenTemp(temp);
     }
   };
-  
-  
+
   const handleChange = (e) => {
     setformData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -40,7 +39,8 @@ function BookingModal({ data, setopenModal }) {
           amenities: amenTemp,
         }
       );
-      window.location.reload();
+      navigate("/");
+      alert('YOUR BOOKING HAS BEEN UPDATED ');
     } catch (e) {
       console.log(e);
       alert("UNABLE TO TAKE BOOKING");

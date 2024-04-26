@@ -13,7 +13,7 @@ const roomSchema=new mongoose.Schema({
         default:[],
           validate:{
                 validator:function(arr){
-                    return arr.length<=3;
+                    return arr.length<=2;
                 }
             }
 
